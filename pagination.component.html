@@ -1,0 +1,59 @@
+<div class="row">
+    <div class="col-lg-6">
+        <nav aria-label="Pagination" *ngIf="totalPage > 1">
+            <ul class="pagination">
+                <li [class.disabled]="current == 1">
+                    <a href="javascript:;" (click)="setPage(current-1, itemsPerPage)" aria-label="Previous">
+                        <span aria-hidden="true">Previous</span>
+                    </a>
+                </li>
+
+                <ng-container *ngFor="let page of pages;">
+                    <li *ngIf="current <= 4 && page <= 4" [class.active]="page == current">
+                        <a href="javascript:;" (click)="setPage(page, itemsPerPage)">{{ page }}</a>
+                    </li>
+                </ng-container>
+
+                <ng-container *ngIf="current <= 4 ">
+                    <li><a href="javascript:;">...</a></li>
+                    <li><a href="javascript:;" (click)="setPage(totalPage)">{{ totalPage }}</a></li>
+                </ng-container>
+
+
+                <ng-container *ngIf="current > 4 && (totalPage - 4) > current">
+                    <li>
+                        <a href="javascript:;" (click)="setPage(1)">1</a>
+                    </li>
+                    <li><a href="javascript:;">...</a></li>
+                    <li class="active">
+                        <a href="javascript:;" (click)="setPage(current)">{{ current }}</a>
+                    </li>
+                    <li><a href="javascript:;">...</a></li>
+                    <li>
+                        <a href="javascript:;" (click)="setPage(totalPage)">{{ totalPage }}</a>
+                    </li>
+                </ng-container>
+
+
+                <ng-container *ngIf="current >= (totalPage - 4) &&  totalPage > 4">
+                    <li><a href="javascript:;" (click)="setPage(1)">1</a></li>
+                    <li><a href="javascript:;">...</a></li>
+                </ng-container>
+
+                <ng-container *ngFor="let page of pages;">
+                    <li *ngIf="current >= (totalPage - 4) &&  totalPage > 4 &&  page > (totalPage - 4)"
+                        [class.active]="page == current">
+                        <a href="javascript:;" (click)="setPage(page, itemsPerPage)">{{ page }}</a>
+                    </li>
+                </ng-container>
+
+
+                <li [class.disabled]="current == totalPage">
+                    <a href="javascript:;" (click)="setPage(current+1, itemsPerPage)" aria-label="Next">
+                        <span aria-hidden="true">Next</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
